@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import { addTodos } from "../redux/reducer";
 import { GoPlus } from "react-icons/go";
 import { motion } from "framer-motion";
+import Modal from "./Modal";
 
 const mapStateToProps = (state) => {
   return {
     todos: state,
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (obj) => dispatch(addTodos(obj)),
@@ -17,39 +17,25 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const Todos = (props) => {
-  const [todo, setTodo] = useState("");
+  const [addTodoModal, setaddTodoModal] = useState(false);
 
-  const handleChange = (e) => {
-    setTodo(e.target.value);
-  };
-
-  const add = () => {
-    if (todo === "") {
-      alert("Input is Empty");
-    } else {
-      props.addTodo({
-        id: Math.floor(Math.random() * 1000),
-        item: todo,
-        completed: false,
-      });
-      setTodo("");
-    }
-  };
-  //console.log("props from store", props);
   return (
     <div className="addTodos">
+      {addTodoModal&& <Modal set={setaddTodoModal} addTodo={props.addTodo} />}
       <input
         type="text"
-        onChange={(e) => handleChange(e)}
-        className="todo-input"
-        value={todo}
+        placeholder="Add Todo..."
+        onClick={()=>{setaddTodoModal(true);}}
+        className="todo-input cursor-pointer"
+        value={""}
+        readOnly
       />
 
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="add-btn"
-        onClick={() => add()}
+        onClick={()=>{setaddTodoModal(true);}}
       >
         <GoPlus />
       </motion.button>
@@ -57,5 +43,4 @@ const Todos = (props) => {
     </div>
   );
 };
-//we can use connect method to connect this component with redux store
 export default connect(mapStateToProps, mapDispatchToProps)(Todos);

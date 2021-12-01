@@ -19,7 +19,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   color: #222;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .App {
@@ -126,12 +126,12 @@ body {
   background: white;
 
   margin: 0 1rem 1rem 0;
-  height: 8rem;
+  /* height: 8rem; */
   width: 18rem;
   border-radius: 0.5rem;
   padding: 1rem;
 
-  position: relative;
+  /* position: relative; */
 }
 
 .card textarea {
@@ -182,7 +182,7 @@ body {
 
 @media Screen and (max-width: 640px) {
   .displaytodos {
-    overflow: hidden;
+    /* overflow: hidden; */
     margin-top: 2rem;
   }
   .displaytodos ul {
